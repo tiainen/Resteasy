@@ -1,9 +1,9 @@
 package org.jboss.resteasy.test.client;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
+import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.client.HttpClient;
+import cz.msebera.android.httpclient.client.methods.HttpPost;
+import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 import org.apache.log4j.Logger;
 import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.ClientRequest;
@@ -100,7 +100,7 @@ public class ClientExecutorShutdownTest extends BaseResourceTest
    /**
     * Verify that if ApacheHttpClient4Executor creates its own HttpClient,
     * then ApacheHttpClient4Executor.finalize() will close the HttpClient's
-    * org.apache.http.conn.ClientConnectionManager.
+    * cz.msebera.android.httpclient.conn.ClientConnectionManager.
     */
    @Test
    public void testApacheHttpClient4ExecutorNonSharedHttpClientFinalize() throws Throwable
@@ -126,7 +126,7 @@ public class ClientExecutorShutdownTest extends BaseResourceTest
    /**
     * Verify that if ApacheHttpClient4Executor creates its own HttpClient,
     * then ApacheHttpClient4Executor.close() will close the HttpClient's
-    * org.apache.http.conn.ClientConnectionManager.
+    * cz.msebera.android.httpclient.conn.ClientConnectionManager.
     */
    @Test
    public void testApacheHttpClient4ExecutorNonSharedHttpClientClose() throws Throwable
@@ -152,7 +152,7 @@ public class ClientExecutorShutdownTest extends BaseResourceTest
    /**
     * Verify that if ApacheHttpClient4Executor receives an HttpClient through
     * a constructor, then ApacheHttpClient4Executor.finalize() will not close the
-    * HttpClient's org.apache.http.conn.ClientConnectionManager.
+    * HttpClient's cz.msebera.android.httpclient.conn.ClientConnectionManager.
     */
    @Test
    public void testApacheHttpClient4ExecutorSharedHttpClientFinalize() throws Throwable
@@ -173,7 +173,7 @@ public class ClientExecutorShutdownTest extends BaseResourceTest
    /**
     * Verify that if ApacheHttpClient4Executor receives an HttpClient through
     * a constructor, then ApacheHttpClient4Executor.close() will not close the
-    * HttpClient's org.apache.http.conn.ClientConnectionManager.
+    * HttpClient's cz.msebera.android.httpclient.conn.ClientConnectionManager.
     */
    @Test
    public void testApacheHttpClient4ExecutorSharedHttpClientClose() throws Throwable

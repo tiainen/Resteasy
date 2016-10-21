@@ -1,6 +1,6 @@
 package org.jboss.resteasy.client.spring;
 
-import org.apache.http.client.HttpClient;
+import cz.msebera.android.httpclient.client.HttpClient;
 import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.ProxyFactory;
 import org.jboss.resteasy.client.core.executors.ApacheHttpClient4Executor;
@@ -139,10 +139,10 @@ public class RestClientProxyFactoryBean<T> implements FactoryBean<T>,
     * Optional property. If this property is set and {@link #clientExecutor} is
     * null, this will be used by proxy generation. This could be useful for
     * example when you want to use a
-    * {@link org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager}
+    * {@link cz.msebera.android.httpclient.impl.conn.tsccm.ThreadSafeClientConnManager}
     * instead of a
-    * {@link org.apache.http.impl.conn.SingleClientConnManager} which
-    * is the default in {@link org.apache.http.client.HttpClient}.
+    * {@link cz.msebera.android.httpclient.impl.conn.SingleClientConnManager} which
+    * is the default in {@link cz.msebera.android.httpclient.client.HttpClient}.
     *
     * @param httpClient the instance to be used by proxy generation
     * @see ProxyFactory#create(Class, URI, HttpClient, ResteasyProviderFactory)

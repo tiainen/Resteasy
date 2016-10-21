@@ -1,6 +1,6 @@
 package org.jboss.resteasy.plugins.server.netty;
 
-import org.apache.commons.codec.binary.Base64;
+import cz.msebera.android.httpclient.extras.Base64;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.resteasy.core.SynchronousDispatcher;
 import org.jboss.resteasy.core.ThreadLocalResteasyProviderFactory;
@@ -115,7 +115,7 @@ public class RequestDispatcher
             if ("basic".equals(type))
             {
                String cookie = auth.substring(6);
-               cookie = new String(Base64.decodeBase64(cookie.getBytes()));
+               cookie = new String(Base64.decode(cookie.getBytes(), Base64.DEFAULT));
                String[] split = cookie.split(":");
                Principal user = null;
                try

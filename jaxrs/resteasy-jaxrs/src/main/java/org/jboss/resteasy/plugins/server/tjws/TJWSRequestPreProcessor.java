@@ -1,6 +1,6 @@
 package org.jboss.resteasy.plugins.server.tjws;
 
-import org.apache.commons.codec.binary.Base64;
+import cz.msebera.android.httpclient.extras.Base64;
 import org.jboss.resteasy.plugins.server.embedded.SecurityDomain;
 import org.jboss.resteasy.util.HttpHeaderNames;
 import org.jboss.resteasy.util.HttpResponseCodes;
@@ -50,7 +50,7 @@ public class TJWSRequestPreProcessor
             if ("basic".equals(type))
             {
                String cookie = auth.substring(6);
-               cookie = new String(Base64.decodeBase64(cookie.getBytes()));
+               cookie = new String(Base64.decode(cookie.getBytes(), Base64.DEFAULT));
                String[] split = cookie.split(":");
                //System.out.println("Authenticating user: " + split[0] + " passwd: " + split[1]);
                Principal user = null;

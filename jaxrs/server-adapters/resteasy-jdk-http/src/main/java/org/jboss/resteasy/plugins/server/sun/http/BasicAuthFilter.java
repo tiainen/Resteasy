@@ -2,7 +2,7 @@ package org.jboss.resteasy.plugins.server.sun.http;
 
 import com.sun.net.httpserver.Filter;
 import com.sun.net.httpserver.HttpExchange;
-import org.apache.commons.codec.binary.Base64;
+import cz.msebera.android.httpclient.extras.Base64;
 import org.jboss.resteasy.plugins.server.embedded.SecurityDomain;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.jboss.resteasy.util.HttpHeaderNames;
@@ -36,7 +36,7 @@ public class BasicAuthFilter extends Filter
          if ("basic".equals(type))
          {
             String cookie = auth.substring(6);
-            cookie = new String(Base64.decodeBase64(cookie.getBytes()));
+            cookie = new String(Base64.decode(cookie.getBytes(), Base64.DEFAULT));
             String[] split = cookie.split(":");
             //System.out.println("Authenticating user: " + split[0] + " passwd: " + split[1]);
             Principal user = null;

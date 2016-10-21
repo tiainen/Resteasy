@@ -1,9 +1,9 @@
 package org.jboss.resteasy.test.nextgen.providers.jackson;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.client.methods.HttpGet;
+import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import javax.xml.bind.annotation.*;

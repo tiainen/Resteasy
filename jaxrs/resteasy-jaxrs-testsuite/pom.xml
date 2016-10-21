@@ -4,7 +4,7 @@
     <parent>
         <artifactId>resteasy-jaxrs-all</artifactId>
         <groupId>org.jboss.resteasy</groupId>
-        <version>3.0.12.Final</version>
+        <version>3.0.12.Final.Android</version>
     </parent>
 
     <artifactId>resteasy-jaxrs-testsuite</artifactId>
@@ -47,11 +47,15 @@
             <groupId>org.jboss.spec.javax.servlet</groupId>
             <artifactId>jboss-servlet-api_3.1_spec</artifactId>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.httpcomponents</groupId>-->
+            <!--<artifactId>httpclient</artifactId>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
+            <groupId>cz.msebera.android</groupId>
             <artifactId>httpclient</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-undertow</artifactId>

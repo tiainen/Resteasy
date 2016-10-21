@@ -29,7 +29,7 @@ public class BasicAuthHelper
       type = type.toLowerCase();
       if (!type.equalsIgnoreCase("Basic")) return null;
       String val = header.substring(6);
-      val = new String(org.apache.commons.codec.binary.Base64.decodeBase64(val.getBytes()));
+      val = new String(cz.msebera.android.httpclient.extras.Base64.decode(val.getBytes(), cz.msebera.android.httpclient.extras.Base64.DEFAULT));
       String[] split = val.split(":");
       if (split.length != 2) return null;
       return split;

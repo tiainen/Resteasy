@@ -1,25 +1,27 @@
 package org.jboss.resteasy.client.jaxrs.engines;
 
+import com.gluonhq.charm.down.Services;
+import com.gluonhq.charm.down.plugins.DeviceService;
 import org.apache.commons.io.output.DeferredFileOutputStream;
-import org.apache.http.conn.ClientConnectionManager;
-import org.apache.http.entity.FileEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpHost;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.client.params.HttpClientParams;
-import org.apache.http.conn.params.ConnRoutePNames;
-import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.protocol.HttpContext;
-import org.jboss.resteasy.client.ClientRequest;
+import cz.msebera.android.httpclient.conn.ClientConnectionManager;
+import cz.msebera.android.httpclient.entity.FileEntity;
+import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
+import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.HttpEntity;
+import cz.msebera.android.httpclient.HttpHost;
+import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.client.HttpClient;
+import cz.msebera.android.httpclient.client.methods.HttpGet;
+import cz.msebera.android.httpclient.client.methods.HttpPost;
+import cz.msebera.android.httpclient.client.methods.HttpRequestBase;
+import cz.msebera.android.httpclient.client.params.HttpClientParams;
+import cz.msebera.android.httpclient.conn.params.ConnRoutePNames;
+import cz.msebera.android.httpclient.entity.ByteArrayEntity;
+import cz.msebera.android.httpclient.message.BasicHeader;
+import cz.msebera.android.httpclient.protocol.HTTP;
+import cz.msebera.android.httpclient.protocol.HttpContext;
 import org.jboss.resteasy.client.core.SelfExpandingBufferredInputStream;
+import org.jboss.resteasy.client.core.executors.ApacheHttpClient4Executor;
 import org.jboss.resteasy.client.jaxrs.ClientHttpEngine;
 import org.jboss.resteasy.client.jaxrs.internal.ClientInvocation;
 import org.jboss.resteasy.client.jaxrs.internal.ClientResponse;
@@ -35,10 +37,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.management.ManagementFactory;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.function.Function;
 
 /**
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
@@ -55,7 +58,15 @@ public class ApacheHttpClient4Engine implements ClientHttpEngine
 
    static
    {
-      processId = ManagementFactory.getRuntimeMXBean().getName().replaceAll("[^0-9a-zA-Z]", "");
+      processId = Services.get(DeviceService.class)
+              .flatMap(new Function<DeviceService, Optional<String>>() {
+                 @Override
+                 public Optional<String> apply(DeviceService deviceService) {
+                    return Optional.of(deviceService.getUuid());
+                 }
+              })
+              .orElse(UUID.randomUUID().toString());
+//      processId = ManagementFactory.getRuntimeMXBean().getName().replaceAll("[^0-9a-zA-Z]", "");
    }
 
    protected HttpClient httpClient;
@@ -608,7 +619,7 @@ public class ApacheHttpClient4Engine implements ClientHttpEngine
 
 
    /**
-    * We use {@link org.apache.http.entity.FileEntity} as the {@link HttpEntity} implementation when the request OutputStream has been
+    * We use {@link cz.msebera.android.httpclient.entity.FileEntity} as the {@link HttpEntity} implementation when the request OutputStream has been
     * saved to a File on disk (because it was too large to fit into memory see however, we have to delete
     * the File supporting the <code>FileEntity</code>, otherwise the disk will soon run out of space - remember
     * that there can be very huge files, in GB range, processed on a regular basis - and FileEntity exposes its
